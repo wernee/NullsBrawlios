@@ -1,222 +1,358 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nulls Brawl Download</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f2f2f2;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Nulls Brawl Ultimate Download - iOS & Android</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: #f8f9fa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1c1c1e;
+    user-select: none;
+  }
 
-    .safari-bar {
-      background: #1d1d1f;
-      color: white;
-      padding: 8px 12px;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-    }
+  /* Fake Status Bar */
+  .status-bar {
+    background: #1c1c1e;
+    color: white;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    font-feature-settings: 'tnum';
+  }
 
-    .site-bar {
-      background: white;
-      padding: 6px 10px;
-      font-size: 13px;
-      border-bottom: 1px solid #ccc;
-      color: #444;
-    }
+  /* URL Bar */
+  .url-bar {
+    background: white;
+    padding: 8px 16px;
+    border-bottom: 1px solid #d1d1d6;
+    font-size: 14px;
+    color: #48484a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .url-bar .lock {
+    color: #34c759;
+  }
 
-    .container {
-      max-width: 480px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+  /* Main container */
+  .container {
+    max-width: 700px;
+    margin: 25px auto 60px;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 0.1);
+    padding: 30px 40px;
+  }
 
-    .header {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
+  /* Header: Icon + Title */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  .icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 25px;
+    box-shadow: 0 6px 12px rgb(0 0 0 / 0.12);
+  }
+  .title-block {
+    flex-grow: 1;
+  }
+  .title-block .title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .title-block .version {
+    font-size: 16px;
+    color: #6e6e73;
+  }
 
-    .icon {
-      width: 70px;
-      border-radius: 15px;
-    }
+  /* Bewertung Sterne */
+  .stars {
+    font-size: 20px;
+    color: #ffcc00;
+    margin: 20px 0;
+  }
 
-    .title {
-      font-size: 22px;
-      font-weight: 600;
-    }
+  /* Buttons */
+  .btns {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  button.btn {
+    flex: 1;
+    background: #007aff;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    border: none;
+    border-radius: 18px;
+    padding: 16px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 8px 15px rgb(0 122 255 / 0.35);
+  }
+  button.btn.android {
+    background: #28a745;
+    box-shadow: 0 8px 15px rgb(40 167 69 / 0.35);
+  }
+  button.btn:hover {
+    filter: brightness(110%);
+  }
 
-    .version {
-      font-size: 14px;
-      color: #777;
-    }
+  /* Text sections */
+  .text p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    color: #2c2c2e;
+  }
 
-    .stars {
-      margin: 10px 0;
-      color: #FFD700;
-    }
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 13px;
+    color: #8e8e93;
+    margin-top: 40px;
+  }
 
-    .btns {
-      display: flex;
-      gap: 10px;
-      margin: 20px 0;
-    }
+  /* Popup Overlay */
+  .popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
 
-    .btn {
-      flex: 1;
-      padding: 12px;
-      font-weight: bold;
-      border-radius: 10px;
-      border: none;
-      font-size: 15px;
-      cursor: pointer;
-    }
+  /* Popup Box */
+  .popup {
+    background: white;
+    max-width: 460px;
+    width: 90%;
+    padding: 28px 32px;
+    border-radius: 22px;
+    box-shadow: 0 0 35px rgba(0,0,0,0.3);
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1c1c1e;
+  }
 
-    .btn.ios { background: #007aff; color: white; }
-    .btn.android { background: #27ae60; color: white; }
+  .popup h2 {
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    color: #e03e2f;
+  }
 
-    .text {
-      font-size: 15px;
-      color: #444;
-      line-height: 1.5;
-    }
+  .popup p {
+    margin: 10px 0;
+  }
 
-    .popup-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
+  .warn {
+    color: #e03e2f;
+    font-weight: 700;
+  }
 
-    .popup {
-      background: white;
-      width: 90%;
-      max-width: 420px;
-      padding: 25px;
-      border-radius: 18px;
-      text-align: center;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
-    }
+  .popup-btn {
+    margin-top: 24px;
+    background: #007aff;
+    color: white;
+    padding: 15px 32px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,122,255,0.4);
+    transition: background-color 0.3s ease;
+  }
+  .popup-btn:hover {
+    filter: brightness(115%);
+  }
 
-    .popup h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .popup p {
-      font-size: 14px;
-      color: #333;
-      margin: 6px 0;
-    }
-
-    .popup .warn {
-      color: #e74c3c;
-      font-weight: bold;
-    }
-
-    .popup-btn {
-      margin-top: 15px;
-      background: #007aff;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
+  /* Fake Progress Bar */
+  .progress-bar {
+    background: #e5e5ea;
+    border-radius: 14px;
+    overflow: hidden;
+    height: 20px;
+    margin-top: 20px;
+  }
+  .progress {
+    background: #007aff;
+    height: 100%;
+    width: 0;
+    transition: width 0.4s ease;
+  }
+</style>
 </head>
 <body>
 
 <!-- Fake Status Bar -->
-<div class="safari-bar">
-  <div>22:41</div>
+<div class="status-bar">
+  <div id="time">22:41</div>
   <div>🔋 72%</div>
 </div>
-<div class="site-bar">🔒 nulls-brawl-ios.download</div>
+<div class="url-bar">
+  <span class="lock">🔒</span> nulls-brawl.official-download.com
+</div>
 
-<!-- Main Content -->
+<!-- Main Container -->
 <div class="container">
   <div class="header">
-    <img src="https://img.icons8.com/fluency/96/null-brawler.png" class="icon" alt="App Icon">
-    <div>
-      <div class="title">Nulls Brawl</div>
-      <div class="version">v61.249 • 628 MB</div>
+    <img src="https://img.icons8.com/fluency/96/null-brawler.png" alt="Nulls Brawl Icon" class="icon" />
+    <div class="title-block">
+      <div class="title">Nulls Brawl Ultimate</div>
+      <div class="version">Version 61.249 &bull; 628 MB</div>
     </div>
   </div>
 
   <div class="stars">★★★★★</div>
 
   <div class="btns">
-    <button class="btn ios" onclick="showPopup('ios')">Für iOS</button>
-    <button class="btn android" onclick="showPopup('android')">Für Android</button>
+    <button class="btn ios" onclick="showPopup('ios')">Download für iOS</button>
+    <button class="btn android" onclick="showPopup('android')">Download für Android</button>
   </div>
 
   <div class="text">
-    <p>Erlebe die ultimative Version von Brawl Stars mit unendlichen Juwelen, allen Skins freigeschaltet und privatem Server!</p>
-    <p>Kompatibel mit allen iOS- und Android-Geräten. Keine Werbung, keine In-App-Käufe, alles kostenlos!</p>
+    <p>Erlebe jetzt die <strong>ultimative Nulls Brawl Version</strong> mit unendlich vielen Juwelen, allen Skins freigeschaltet und einem privaten Server, der dir unbegrenzten Spielspaß garantiert.</p>
+    <p>Dieses Update ist kompatibel mit <strong>allen aktuellen iOS- und Android-Geräten</strong>. Das Spiel ist 100% kostenlos, ohne Werbung, ohne In-App-Käufe. Einfach herunterladen und direkt loslegen!</p>
+    <p><strong>Features im Überblick:</strong></p>
+    <ul>
+      <li>Unbegrenzte Juwelen und Münzen</li>
+      <li>Alle Charakter-Skins und Emotes freigeschaltet</li>
+      <li>Privater Server mit schneller Verbindung und ohne Lags</li>
+      <li>Regelmäßige Updates und Bugfixes</li>
+      <li>Kein Jailbreak oder Root erforderlich</li>
+      <li>100% sicher &amp; virenfrei</li>
+    </ul>
+    <p>Warte nicht länger! Hol dir die beste Brawl Stars Version, die es jemals gab. Du bist nur einen Klick vom ultimativen Gaming-Erlebnis entfernt.</p>
   </div>
 </div>
 
-<!-- Popup -->
+<!-- Popup Overlay -->
 <div class="popup-overlay" id="popup">
   <div class="popup" id="popupContent">
-    <!-- JS füllt den Inhalt -->
+    <!-- Content wird per JS geladen -->
   </div>
 </div>
 
 <script>
-  function showPopup(platform) {
-    const popup = document.getElementById("popup");
-    const content = document.getElementById("popupContent");
+  // Echtzeit Uhr
+  function updateTime() {
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2, '0');
+    const m = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('time').textContent = h + ':' + m;
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
 
-    if (platform === 'ios') {
+  // Popup anzeigen mit Fake-Warnung
+  function showPopup(platform) {
+    const popup = document.getElementById('popup');
+    const content = document.getElementById('popupContent');
+    
+    if(platform === 'ios') {
       content.innerHTML = `
         <h2>⚠ Apple Sicherheitswarnung</h2>
-        <p class="warn">Ihr iPhone ist stark gefährdet.</p>
-        <p>Es wurden 14 Viren & 3 Malware-Dateien gefunden.</p>
-        <p>Grund: Besuch von unsicheren Webseiten und Downloads.</p>
-        <p>🔒 Trojaner / Spyware / Keylogger aktiv</p>
-        <p>⚡ Akkuverbrauch und Gerätetemperatur erhöht</p>
-        <p>🔐 Zugriff auf Kamera & Kontakte möglich</p>
-        <p class="warn">Entfernen Sie alle Bedrohungen sofort!</p>
-        <button class="popup-btn" onclick="removeVirus()">Entfernen</button>
+        <p class="warn">Ihr iPhone ist extrem gefährdet!</p>
+        <p>Wir haben <strong>14 Viren</strong> und <strong>3 Malware-Dateien</strong> auf Ihrem Gerät entdeckt.</p>
+        <p>Grund: Besuch gefährlicher Webseiten und Downloads unbekannter Herkunft.</p>
+        <p>Folgende Bedrohungen sind aktiv:</p>
+        <ul style="text-align: left; margin-left: 25px; margin-bottom: 10px;">
+          <li>🔒 Trojaner</li>
+          <li>🕵️ Spyware</li>
+          <li>⌨️ Keylogger</li>
+          <li>📸 Zugriff auf Kamera & Kontakte</li>
+        </ul>
+        <p>⚡ Ihr Akku wird extrem belastet und das Gerät läuft heiß.</p>
+        <p class="warn">Entfernen Sie alle Bedrohungen jetzt sofort!</p>
+        <button class="popup-btn" onclick="startRemoval('ios')">Viren entfernen</button>
       `;
     } else {
       content.innerHTML = `
-        <h2>⚠ Android Warnung</h2>
-        <p class="warn">3 schädliche APKs erkannt</p>
-        <p>Gefunden: Android.Ransom.VN, Trojan.MalDropper, Spy.Agent</p>
-        <p>🛑 Ihr Gerät ist kompromittiert.</p>
-        <p>🔥 Hohe CPU-Auslastung, Akkuschäden möglich</p>
-        <p>💾 5 gefährliche Dateien im internen Speicher</p>
+        <h2>⚠ Android Sicherheitswarnung</h2>
+        <p class="warn">3 schädliche APKs erkannt!</p>
+        <p>Gefunden wurden: <strong>Android.Ransom.VN</strong>, <strong>Trojan.MalDropper</strong>, <strong>Spy.Agent</strong></p>
+        <p>Ihr Gerät ist kompromittiert:</p>
+        <ul style="text-align: left; margin-left: 25px; margin-bottom: 10px;">
+          <li>🔥 Hohe CPU-Auslastung</li>
+          <li>🔋 Schnell leerer Akku</li>
+          <li>💾 Gefährliche Dateien im Speicher</li>
+        </ul>
         <p class="warn">Sofortige Bereinigung empfohlen!</p>
-        <button class="popup-btn" onclick="removeVirus()">Jetzt bereinigen</button>
+        <button class="popup-btn" onclick="startRemoval('android')">Jetzt bereinigen</button>
       `;
     }
-
-    popup.style.display = "flex";
+    popup.style.display = 'flex';
   }
 
-  function removeVirus() {
-    const content = document.getElementById("popupContent");
+  // Fake Viren-Entfernung mit Progressbar
+  function startRemoval(platform) {
+    const content = document.getElementById('popupContent');
     content.innerHTML = `
-      <h2>✅ Viren erfolgreich entfernt</h2>
-      <p>Alle Bedrohungen wurden vom System gelöscht.</p>
-      <p>Ihr Gerät ist jetzt sicher.</p>
+      <h2>Virenentfernung läuft...</h2>
+      <div class="progress-bar"><div class="progress" id="progress"></div></div>
+      <p id="statusText">Bitte warten...</p>
     `;
+
+    let progress = 0;
+    const progressBar = document.getElementById('progress');
+    const statusText = document.getElementById('statusText');
+
+    const interval = setInterval(() => {
+      progress += Math.floor(Math.random() * 10) + 5; // 5-14%
+      if (progress > 100) progress = 100;
+      progressBar.style.width = progress + '%';
+
+      if (progress < 40) {
+        statusText.textContent = 'Scanne Systemdateien...';
+      } else if (progress < 75) {
+        statusText.textContent = 'Entferne schädliche Dateien...';
+      } else if (progress < 95) {
+        statusText.textContent = 'Optimierung läuft...';
+      } else {
+        statusText.textContent = 'Abschluss der Bereinigung...';
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          content.innerHTML = `
+            <h2>✅ Viren erfolgreich entfernt</h2>
+            <p>Alle Bedrohungen wurden vollständig vom System gelöscht.</p>
+            <p>Ihr Gerät ist jetzt sicher und geschützt.</p>
+            <button class="popup-btn" onclick="closePopup()">Schließen</button>
+          `;
+        }, 1000);
+      }
+    }, 500);
+  }
+
+  // Popup schließen
+  function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
   }
 </script>
 
