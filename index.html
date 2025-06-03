@@ -2,87 +2,85 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nulls Brawl v61.249</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nulls Brawl Download</title>
   <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #f2f2f2;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f2f2f2;
     }
 
-    .status-bar {
-      background: #1d1d1d;
+    .safari-bar {
+      background: #1d1d1f;
       color: white;
       padding: 8px 12px;
       font-size: 14px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+    }
+
+    .site-bar {
+      background: white;
+      padding: 6px 10px;
+      font-size: 13px;
+      border-bottom: 1px solid #ccc;
+      color: #444;
     }
 
     .container {
-      max-width: 500px;
-      margin: auto;
+      max-width: 480px;
+      margin: 20px auto;
       background: white;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      margin-top: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .header {
       display: flex;
+      gap: 15px;
       align-items: center;
     }
 
     .icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 16px;
-      margin-right: 15px;
+      width: 70px;
+      border-radius: 15px;
     }
 
     .title {
-      font-size: 24px;
-      font-weight: 700;
+      font-size: 22px;
+      font-weight: 600;
     }
 
     .version {
-      color: #555;
-      font-size: 15px;
+      font-size: 14px;
+      color: #777;
     }
 
     .stars {
-      color: #FFD700;
       margin: 10px 0;
+      color: #FFD700;
     }
 
     .btns {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin: 20px 0;
     }
 
     .btn {
       flex: 1;
       padding: 12px;
+      font-weight: bold;
       border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
       border: none;
+      font-size: 15px;
       cursor: pointer;
     }
 
-    .android {
-      background-color: #9b59b6;
-      color: white;
-    }
-
-    .ios {
-      background-color: #1d8df7;
-      color: white;
-    }
+    .btn.ios { background: #007aff; color: white; }
+    .btn.android { background: #27ae60; color: white; }
 
     .text {
       font-size: 15px;
@@ -90,7 +88,6 @@
       line-height: 1.5;
     }
 
-    /* Popup */
     .popup-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -99,38 +96,44 @@
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 999;
+      z-index: 9999;
     }
 
     .popup {
       background: white;
       width: 90%;
-      max-width: 400px;
+      max-width: 420px;
       padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      border-radius: 18px;
       text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
     }
 
     .popup h2 {
-      font-size: 20px;
-      color: #000;
+      font-size: 18px;
       margin-bottom: 10px;
     }
 
     .popup p {
-      font-size: 15px;
+      font-size: 14px;
       color: #333;
-      margin-bottom: 10px;
+      margin: 6px 0;
+    }
+
+    .popup .warn {
+      color: #e74c3c;
+      font-weight: bold;
     }
 
     .popup-btn {
-      padding: 12px 20px;
+      margin-top: 15px;
       background: #007aff;
       color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 15px;
       font-weight: bold;
       border: none;
-      border-radius: 10px;
       cursor: pointer;
     }
   </style>
@@ -138,12 +141,13 @@
 <body>
 
 <!-- Fake Status Bar -->
-<div class="status-bar">
-  <div>19:00</div>
-  <div>📶 LTE 🔋 45%</div>
+<div class="safari-bar">
+  <div>22:41</div>
+  <div>🔋 72%</div>
 </div>
+<div class="site-bar">🔒 nulls-brawl-ios.download</div>
 
-<!-- Main App Card -->
+<!-- Main Content -->
 <div class="container">
   <div class="header">
     <img src="https://img.icons8.com/fluency/96/null-brawler.png" class="icon" alt="App Icon">
@@ -156,37 +160,62 @@
   <div class="stars">★★★★★</div>
 
   <div class="btns">
-    <button class="btn android">Download</button>
-    <button class="btn ios" onclick="showPopup()">Für iOS</button>
+    <button class="btn ios" onclick="showPopup('ios')">Für iOS</button>
+    <button class="btn android" onclick="showPopup('android')">Für Android</button>
   </div>
 
   <div class="text">
-    <p><b>Nulls Brawl</b> ist eine modifizierte Version von Brawl Stars auf privaten Servern. Du bekommst unbegrenzt Gems, Gold und alle Skins sofort – ohne In-App-Käufe.</p>
-    <p>Keine Werbung, keine Limits. Spiel mit Freunden, gründe Clubs und genieße alles wie im Original – nur besser.</p>
+    <p>Erlebe die ultimative Version von Brawl Stars mit unendlichen Juwelen, allen Skins freigeschaltet und privatem Server!</p>
+    <p>Kompatibel mit allen iOS- und Android-Geräten. Keine Werbung, keine In-App-Käufe, alles kostenlos!</p>
   </div>
 </div>
 
-<!-- Fake Popup -->
+<!-- Popup -->
 <div class="popup-overlay" id="popup">
   <div class="popup" id="popupContent">
-    <h2>Apple Sicherheitswarnung</h2>
-    <p>Ihr iPhone wurde mit <b>14 Viren</b> infiziert.</p>
-    <p>Sie haben kürzlich eine gefährliche Seite besucht.</p>
-    <p>Klicken Sie unten, um die Viren zu entfernen.</p>
-    <button class="popup-btn" onclick="removeVirus()">Entfernen</button>
+    <!-- JS füllt den Inhalt -->
   </div>
 </div>
 
 <script>
-  function showPopup() {
-    document.getElementById('popup').style.display = 'flex';
+  function showPopup(platform) {
+    const popup = document.getElementById("popup");
+    const content = document.getElementById("popupContent");
+
+    if (platform === 'ios') {
+      content.innerHTML = `
+        <h2>⚠ Apple Sicherheitswarnung</h2>
+        <p class="warn">Ihr iPhone ist stark gefährdet.</p>
+        <p>Es wurden 14 Viren & 3 Malware-Dateien gefunden.</p>
+        <p>Grund: Besuch von unsicheren Webseiten und Downloads.</p>
+        <p>🔒 Trojaner / Spyware / Keylogger aktiv</p>
+        <p>⚡ Akkuverbrauch und Gerätetemperatur erhöht</p>
+        <p>🔐 Zugriff auf Kamera & Kontakte möglich</p>
+        <p class="warn">Entfernen Sie alle Bedrohungen sofort!</p>
+        <button class="popup-btn" onclick="removeVirus()">Entfernen</button>
+      `;
+    } else {
+      content.innerHTML = `
+        <h2>⚠ Android Warnung</h2>
+        <p class="warn">3 schädliche APKs erkannt</p>
+        <p>Gefunden: Android.Ransom.VN, Trojan.MalDropper, Spy.Agent</p>
+        <p>🛑 Ihr Gerät ist kompromittiert.</p>
+        <p>🔥 Hohe CPU-Auslastung, Akkuschäden möglich</p>
+        <p>💾 5 gefährliche Dateien im internen Speicher</p>
+        <p class="warn">Sofortige Bereinigung empfohlen!</p>
+        <button class="popup-btn" onclick="removeVirus()">Jetzt bereinigen</button>
+      `;
+    }
+
+    popup.style.display = "flex";
   }
 
   function removeVirus() {
-    document.getElementById('popupContent').innerHTML = `
-      <h2>✅ Viren entfernt</h2>
-      <p>Alle Viren wurden erfolgreich entfernt.</p>
-      <p>Sie brauchen sich keine Gedanken machen.</p>
+    const content = document.getElementById("popupContent");
+    content.innerHTML = `
+      <h2>✅ Viren erfolgreich entfernt</h2>
+      <p>Alle Bedrohungen wurden vom System gelöscht.</p>
+      <p>Ihr Gerät ist jetzt sicher.</p>
     `;
   }
 </script>
